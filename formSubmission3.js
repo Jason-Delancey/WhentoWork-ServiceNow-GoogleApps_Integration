@@ -1,20 +1,20 @@
 /**
  * A custom script that sends form data to ui-admin@columbia.edu, google UI timeclock spreadsheet,
  * and an email to askcuit@columbia.edu
- * Used for the form 'CUID Access to Gussman Lab'
+ * Used for the form 'Request for Lab Supplies'
  * Made by Jason Delancey
  */
 
 /** Make a trigger that runs at the completion of the Google form submission **/
 var form = FormApp.openByUrl(
-		'https://docs.google.com/a/columbia.edu/forms/d/1PRNO4yxKbPYjpfR7rJKGp-Q-vRb4g_YCekeGMDcOXX8/edit'
+		'https://docs.google.com/a/columbia.edu/forms/d/1-fUx-sie01jU0CRt3ul8AvBnNh_jeWT0n8_FYghe7NQ/edit'
 );
-ScriptApp.newTrigger('gussmanLab')
+ScriptApp.newTrigger('uiSupplies')
 .forForm(form)
 .onFormSubmit()
 .create();
 
-function gussmanLab()
+function uiSupplies()
 {
 	/** Open a form by URL and log the response to each question **/
 	var formResponses = form.getResponses();
@@ -28,12 +28,12 @@ function gussmanLab()
 	}
 	
 	/** Send an email to ui-admin@columbia.edu **/
-	var requestMessage = 'There has been a request for CUID access to Gussman Lab:\n\n'
-	GmailApp.sendEmail('ui-admin@columbia.edu', 'Request for CUID Access to Gussman Lab', requestMessage + itemResponseLine);
+	var requestMessage = 'There has been a request for lab supplies:\n\n'
+	GmailApp.sendEmail('ui-admin@columbia.edu', 'Request for Lab Supplies', requestMessage + itemResponseLine);
 	
 	/** Send an email to askcuit@columbia.edu **/
 	var ticketMessage = '\n\n\n\n****Please forward this ticket to the Computer Lab Support group. Thanks.'
-	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for CUID Access to Gussman Lab', requestMessage + itemResponseLine + ticketMessage, {
+	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Lab Supplies', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'ui-admin@columbia.edu',
 	 });
 }
