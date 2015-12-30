@@ -34,6 +34,6 @@ function uiSupplies()
 	/** Send an email to askcuit@columbia.edu **/
 	var ticketMessage = '\n\n\n\n****Please forward this ticket to the Computer Lab Support group. Thanks.'
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Lab Supplies', requestMessage+ itemResponseLine + ticketMessage, {
-	     cc: 'ui-admin@columbia.edu',
+	     cc: 'jrd2172@columbia.edu',
 	 });
 }
