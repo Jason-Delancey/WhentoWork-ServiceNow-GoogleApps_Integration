@@ -16,7 +16,7 @@ var form4 = FormApp.openByUrl(
 
 function uiSuggestions()
 {
-  setTimeout(doit, 120000);
+  setTimeout(doit, 30000);
   function doit()
   {
     var form4 = FormApp.openByUrl(

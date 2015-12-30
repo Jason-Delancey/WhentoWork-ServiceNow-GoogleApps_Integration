@@ -16,7 +16,7 @@ var form1 = FormApp.openByUrl(
 
 function gussmanLab()
 {
-  setTimeout(doit, 120000);
+  setTimeout(doit, 30000);
   function doit()
   {
     var form1 = FormApp.openByUrl(

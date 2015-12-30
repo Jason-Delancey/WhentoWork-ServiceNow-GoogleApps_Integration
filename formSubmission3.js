@@ -16,7 +16,7 @@ var form3 = FormApp.openByUrl(
 
 function uiSupplies()
 {
-  setTimeout(doit, 120000);
+  setTimeout(doit, 30000);
   function doit()
   {
     var form3 = FormApp.openByUrl(
