@@ -6,18 +6,24 @@
  */
 
 /** Make a trigger that runs at the completion of the Google form submission **/
-var form = FormApp.openByUrl(
-		'https://docs.google.com/a/columbia.edu/forms/d/1ilLF-6nwI80KO5ZYPD_bVwxmuGwdHDpAVbkH2O0yS_I/edit?usp=drive_web'
+var form4 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1ilLF-6nwI80KO5ZYPD_bVwxmuGwdHDpAVbkH2O0yS_I/edit'
 );
-ScriptApp.newTrigger('uiSuggestions')
-.forForm(form)
+/**ScriptApp.newTrigger('uiSuggestions')
+.forForm(form4)
 .onFormSubmit()
-.create();
+.create();**/
 
 function uiSuggestions()
 {
-	/** Open a form by URL and log the response to each question **/
-	var formResponses = form.getResponses();
+  setTimeout(doit, 120000);
+  function doit()
+  {
+    var form4 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1ilLF-6nwI80KO5ZYPD_bVwxmuGwdHDpAVbkH2O0yS_I/edit'
+);
+    /** Open a form by URL and log the response to each question **/
+	var formResponses = form4.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
 	var itemResponses = formResponse.getItemResponses();
@@ -30,4 +36,6 @@ function uiSuggestions()
 	/** Send an email to ui-admin@columbia.edu **/
 	var requestMessage = 'There has been a UI Inquiry/Suggestion:\n\n'
 	GmailApp.sendEmail('ui-admin@columbia.edu', 'UI Inquiry/Suggestion', requestMessage + itemResponseLine);
+  }
+	
 }

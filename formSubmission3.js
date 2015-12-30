@@ -6,18 +6,24 @@
  */
 
 /** Make a trigger that runs at the completion of the Google form submission **/
-var form = FormApp.openByUrl(
+var form3 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1-fUx-sie01jU0CRt3ul8AvBnNh_jeWT0n8_FYghe7NQ/edit'
 );
-ScriptApp.newTrigger('uiSupplies')
-.forForm(form)
+/**ScriptApp.newTrigger('uiSupplies')
+.forForm(form3)
 .onFormSubmit()
-.create();
+.create();*/
 
 function uiSupplies()
 {
-	/** Open a form by URL and log the response to each question **/
-	var formResponses = form.getResponses();
+  setTimeout(doit, 120000);
+  function doit()
+  {
+    var form3 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1-fUx-sie01jU0CRt3ul8AvBnNh_jeWT0n8_FYghe7NQ/edit'
+);
+    /** Open a form by URL and log the response to each question **/
+	var formResponses = form3.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
 	var itemResponses = formResponse.getItemResponses();
@@ -31,9 +37,11 @@ function uiSupplies()
 	var requestMessage = 'There has been a request for lab supplies:\n\n'
 	GmailApp.sendEmail('ui-admin@columbia.edu', 'Request for Lab Supplies', requestMessage + itemResponseLine);
 	
-	/** Send an email to askcuit@columbia.edu **/
+	/** Send an email to askcuit@columbia.edu */
 	var ticketMessage = '\n\n\n\n****Please forward this ticket to the Computer Lab Support group. Thanks.'
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Lab Supplies', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
+  }
+	
 }

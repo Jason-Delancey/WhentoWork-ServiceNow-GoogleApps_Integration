@@ -6,18 +6,24 @@
  */
 
 /** Make a trigger that runs at the completion of the Google form submission **/
-var form = FormApp.openByUrl(
+var form1 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1PRNO4yxKbPYjpfR7rJKGp-Q-vRb4g_YCekeGMDcOXX8/edit'
 );
-ScriptApp.newTrigger('gussmanLab')
-.forForm(form)
+/**ScriptApp.newTrigger('gussmanLab')
+.forForm(form1)
 .onFormSubmit()
-.create();
+.create();*/
 
 function gussmanLab()
 {
-	/** Open a form by URL and log the response to each question **/
-	var formResponses = form.getResponses();
+  setTimeout(doit, 120000);
+  function doit()
+  {
+    var form1 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1PRNO4yxKbPYjpfR7rJKGp-Q-vRb4g_YCekeGMDcOXX8/edit'
+);
+    /** Open a form by URL and log the response to each question **/
+	var formResponses = form1.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
 	var itemResponses = formResponse.getItemResponses();
@@ -36,4 +42,6 @@ function gussmanLab()
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for CUID Access to Gussman Lab', requestMessage + itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
+  }
+	
 }

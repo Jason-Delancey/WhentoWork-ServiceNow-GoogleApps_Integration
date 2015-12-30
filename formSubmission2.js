@@ -6,18 +6,24 @@
  */
 
 /** Make a trigger that runs at the completion of the Google form submission **/
-var form = FormApp.openByUrl(
+var form2 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1dlJeufLbNsapLHg5zm8BslCUrSKitd9l8UQBp5FJNsM/edit'
 );
-ScriptApp.newTrigger('uiTools')
-.forForm(form)
+/**ScriptApp.newTrigger('uiTools')
+.forForm(form2)
 .onFormSubmit()
-.create();
+.create();*/
 
 function uiTools()
 {
-	/** Open a form by URL and log the response to each question **/
-	var formResponses = form.getResponses();
+  setTimeout(doit, 120000);
+  function doit()
+  {
+    var form2 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1dlJeufLbNsapLHg5zm8BslCUrSKitd9l8UQBp5FJNsM/edit'
+);
+    /** Open a form by URL and log the response to each question **/
+	var formResponses = form2.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
 	var itemResponses = formResponse.getItemResponses();
@@ -31,9 +37,11 @@ function uiTools()
 	var requestMessage = 'There has been a request for access to UI tools:\n\n'
 	GmailApp.sendEmail('ui-admin@columbia.edu', 'Request for Access to UI Tools', requestMessage + itemResponseLine);
 	
-	/** Send an email to askcuit@columbia.edu **/
+	/** Send an email to askcuit@columbia.edu */
 	var ticketMessage = '\n\n\n\n****Please forward this ticket to the Computer Lab Support group. Thanks.'
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Access to UI Tools', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
+  }
+	
 }
