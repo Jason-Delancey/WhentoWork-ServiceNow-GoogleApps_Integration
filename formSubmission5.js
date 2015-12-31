@@ -1,0 +1,41 @@
+/**
+ * A custom script that sends form data to ui-admin@columbia.edu, google UI timeclock spreadsheet,
+ * and an email to askcuit@columbia.edu
+ * Used for the form 'UI Inquiries/Suggestions'
+ * Made by Jason Delancey
+ */
+
+/** Make a trigger that runs at the completion of the Google form submission **/
+var form5 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1QrU_0Zlhzx3am9QzUjNbZWo9dkmNXyE4IUWS__IUz4o/edit'
+);
+ScriptApp.newTrigger('uiShiftReport')
+.forForm(form5)
+.onFormSubmit()
+.create();
+
+function uiSuggestions()
+{
+  setTimeout(doit, 30000);
+  function doit()
+  {
+    var form5 = FormApp.openByUrl(
+		'https://docs.google.com/a/columbia.edu/forms/d/1QrU_0Zlhzx3am9QzUjNbZWo9dkmNXyE4IUWS__IUz4o/edit'
+);
+    /** Open a form by URL and log the response to each question **/
+	var formResponses = form5.getResponses();
+	var itemResponseLine = '\n';
+	var formResponse = formResponses[formResponses.length - 1];
+	var itemResponses = formResponse.getItemResponses();
+	for (var j = 0; j < itemResponses.length; j++) 
+	{
+		var itemResponse = itemResponses[j];
+		itemResponseLine = itemResponseLine + itemResponse.getItem().getTitle().toString() + ' :: ' + itemResponse.getResponse().toString() + '\n\n';
+	}
+	
+	/** Send an email to ui-admin@columbia.edu **/
+	var requestMessage = 'There has been a Shift Report:\n\n'
+	GmailApp.sendEmail('ui-admin@columbia.edu', 'UI Inquiry/Suggestion', requestMessage + itemResponseLine);
+  }
+	
+}
