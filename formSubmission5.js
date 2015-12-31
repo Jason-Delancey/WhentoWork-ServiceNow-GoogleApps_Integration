@@ -35,7 +35,13 @@ function uiSuggestions()
 	
 	/** Send an email to ui-admin@columbia.edu **/
 	var requestMessage = 'There has been a Shift Report:\n\n'
-	GmailApp.sendEmail('ui-admin@columbia.edu', 'UI Inquiry/Suggestion', requestMessage + itemResponseLine);
+	GmailApp.sendEmail('ui-admin@columbia.edu', 'Shift Report', requestMessage + itemResponseLine);
+	
+	/** Send an email to askcuit@columbia.edu */
+	var ticketMessage = '\n\n\n\n****Please forward this ticket to the Computer Lab Support group. Thanks.'
+	GmailApp.sendEmail('askcuit@columbia.edu', 'Shift Report', requestMessage+ itemResponseLine + ticketMessage, {
+	     cc: 'jrd2172@columbia.edu',
+	 });
   }
 	
 }
