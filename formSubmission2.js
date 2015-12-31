@@ -14,15 +14,12 @@ var form2 = FormApp.openByUrl(
 .onFormSubmit()
 .create();*/
 
-function uiTools()
+function doit()
 {
-  setTimeout(doit, 30000);
-  function doit()
-  {
-    var form2 = FormApp.openByUrl(
+  var form2 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1dlJeufLbNsapLHg5zm8BslCUrSKitd9l8UQBp5FJNsM/edit'
 );
-    /** Open a form by URL and log the response to each question **/
+  /** Open a form by URL and log the response to each question **/
 	var formResponses = form2.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
@@ -42,6 +39,10 @@ function uiTools()
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Access to UI Tools', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
-  }
+}
 	
+function uiTools()
+{
+	Utilities.sleep(5000);
+	doit();
 }

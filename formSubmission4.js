@@ -14,15 +14,12 @@ var form4 = FormApp.openByUrl(
 .onFormSubmit()
 .create();**/
 
-function uiSuggestions()
+function doit()
 {
-  setTimeout(doit, 30000);
-  function doit()
-  {
-    var form4 = FormApp.openByUrl(
+  var form4 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1ilLF-6nwI80KO5ZYPD_bVwxmuGwdHDpAVbkH2O0yS_I/edit'
 );
-    /** Open a form by URL and log the response to each question **/
+  /** Open a form by URL and log the response to each question **/
 	var formResponses = form4.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
@@ -36,6 +33,10 @@ function uiSuggestions()
 	/** Send an email to ui-admin@columbia.edu **/
 	var requestMessage = 'There has been a UI Inquiry/Suggestion:\n\n'
 	GmailApp.sendEmail('ui-admin@columbia.edu', 'UI Inquiry/Suggestion', requestMessage + itemResponseLine);
-  }
+}
 	
+function uiSuggestions()
+{
+	Utilities.sleep(5000);
+	doit();
 }

@@ -14,15 +14,12 @@ ScriptApp.newTrigger('uiShiftReport')
 .onFormSubmit()
 .create();
 
-function uiSuggestions()
+function doit()
 {
-  setTimeout(doit, 30000);
-  function doit()
-  {
-    var form5 = FormApp.openByUrl(
+  var form5 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1QrU_0Zlhzx3am9QzUjNbZWo9dkmNXyE4IUWS__IUz4o/edit'
 );
-    /** Open a form by URL and log the response to each question **/
+  /** Open a form by URL and log the response to each question **/
 	var formResponses = form5.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
@@ -42,6 +39,11 @@ function uiSuggestions()
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Shift Report', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
-  }
-	
 }
+
+function uiShiftReport()
+{
+  Utilities.sleep(5000);
+  doit();
+}
+

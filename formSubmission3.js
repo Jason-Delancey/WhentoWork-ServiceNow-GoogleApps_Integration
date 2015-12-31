@@ -14,15 +14,12 @@ var form3 = FormApp.openByUrl(
 .onFormSubmit()
 .create();*/
 
-function uiSupplies()
+function doit()
 {
-  setTimeout(doit, 30000);
-  function doit()
-  {
-    var form3 = FormApp.openByUrl(
+  var form3 = FormApp.openByUrl(
 		'https://docs.google.com/a/columbia.edu/forms/d/1-fUx-sie01jU0CRt3ul8AvBnNh_jeWT0n8_FYghe7NQ/edit'
 );
-    /** Open a form by URL and log the response to each question **/
+  /** Open a form by URL and log the response to each question **/
 	var formResponses = form3.getResponses();
 	var itemResponseLine = '\n';
 	var formResponse = formResponses[formResponses.length - 1];
@@ -42,6 +39,10 @@ function uiSupplies()
 	GmailApp.sendEmail('askcuit@columbia.edu', 'Request for Lab Supplies', requestMessage+ itemResponseLine + ticketMessage, {
 	     cc: 'jrd2172@columbia.edu',
 	 });
-  }
+}
 	
+function uiSupplies()
+{
+	Utilities.sleep(5000);
+	doit();
 }
