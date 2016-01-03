@@ -1,6 +1,5 @@
 /**
- * A custom script that sends form data to ui-admin@columbia.edu, google UI timeclock spreadsheet,
- * and an email to askcuit@columbia.edu
+ * A custom script that sends form data to ui-admin@columbia.edu, google UI timeclock spreadsheet
  * Used for the form 'UI Inquiries/Suggestions'
  * Made by Jason Delancey
  */
@@ -37,6 +36,6 @@ function doit()
 	
 function uiSuggestions()
 {
-	Utilities.sleep(5000);
+	Utilities.sleep(3000);
 	doit();
 }
